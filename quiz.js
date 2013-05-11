@@ -1,12 +1,12 @@
-var allQuestions = [
+	var allQuestions = [
 	{
 		question: "Who is #24 on the Lakers?",
-		choices: ["LeBrown James", "Paul Gazzol", "Kobe Bryant", "Phil Jackson"],
+		choices: ["LeBrown James", "Paul Gazzol", "Kobe Bryant", "Tiger Woods"],
 		answer: 3
 	},
 	{
-		question: "Which song is by Nadia Ali??",
-		choices: ["Heart Break", "Beam Me Up", "Crash and Burn", "Suit and Tie"],
+		question: "Which song features Nadia Ali??",
+		choices: ["Heart Break", "We Are Never Getting Back Together", "Love Story", "In My Mind"],
 		answer: 3
 	},
 	{
@@ -30,10 +30,12 @@ var allQuestions = [
 var a = 0;
 var j = 0;
 var userScore = 0;
+var o = 0;
 var questionPlace = document.getElementById('quizQuestion');
 var buttons = document.getElementsByName("test");
 // var theAnswer = allQuestions[j].answer;
 var keepTrack = [];
+
 
 /*
 Create "next" button using JavaScript
@@ -59,13 +61,19 @@ if (j === (allQuestions.length - 1)){
 // If you click on the submit button and there are no radio buttons selected, alert
 // that they must choose an answer.
 
-
+if (buttons[0].checked === false)
+	if (buttons[1].checked === false)
+		if (buttons[2].checked === false)
+			if (buttons[3].checked === false){
+				displayError();
+			}
 
 var theAnswer = allQuestions[j].answer;
 
 for (var i = 0; i < buttons.length; i++){
 	if (buttons[i].checked === true) {
-		a++;
+		a++; 
+		o = 0; // for displayError;
 		if (buttons[i].value === theAnswer.toString()){
 			userScore++;
 			keepTrack.unshift(buttons[i].id);
@@ -77,23 +85,19 @@ for (var i = 0; i < buttons.length; i++){
 			createQuestion();
 			keepTrack.unshift(buttons[i].id);
 			}
-			j++;
-			console.log(userScore);
+			j++; // for answers
 		}
 	}
+	console.log(keepTrack);
 }
 
 /* 
 removeButtons function is used to delete all
 */
 
-function clearQuestion(){
+function clearQuestion(){ // clear the entire question with buttons, labels, br
 	questionPlace.innerHTML = "";
-	/*var allChildren = questionPlace.childNodes; // old code, which works but not as efficient
-		for (var k = 0; k <= allChildren.length; k++){
-			k = 0;
-				questionPlace.removeChild(allChildren[0]);
-					}*/
+
 				}
 /*
 Order of events:
@@ -105,18 +109,16 @@ Order of events:
 
 function createQuestion(e){
 if (a === allQuestions.length){
-	a = 0;
+	a = 0; // 
 }
 // Check which question we are on, if at last question, then reset.
 var question = allQuestions[a].question;
 var choices = allQuestions[a].choices;
 var answer = allQuestions[a].answer;
 
-
 // 1.
 /*
-var newDiv = document.createElement('div');
-questionPlace.appendChild(newDiv);
+
 */
 // 2. 
 var newQuestion = document.createTextNode(question);
@@ -186,19 +188,8 @@ if (prevButton.value === answer.toString()){ // Have to subtract from userScore 
 	userScore--;
 }
 prevButton.checked = true;
-console.log(userScore);
-
-
-// buttonSet();
+console.log(keepTrack);
 }
-
-/* function buttonSet(){
-var test = keepTrack.splice(0,1)[0];
-var prevButton = document.getElementById(test);
-userScore--;
-prevButton.checked = true;
-}
-*/
 
 /*
 Code below is basically a "hard" reset, resetting all the variables and clearing
@@ -210,6 +201,7 @@ console.log(displayScore);
 a = 0;
 j = 0;
 i = 0;
+o = 0;
 userScore = 0;
 keepTrack = [];
 var display = document.getElementById('displayScore');
@@ -224,10 +216,17 @@ var startAgain = document.getElementById('startOver');
 startAgain.style.display = "none";
 }
 
+function displayError(){
+if (o === 0){
+var div1 = document.createElement('div');
+div1.id = "displayError";
+div1.textContent = "You must select an answer";
+questionPlace.appendChild(div1);
+o++;
+}
+}
 
 
-// need to make a score box
-// Upload to GitHub
 // Use OOP to clean up code
 // Recreate with jQuery
 // Style 
