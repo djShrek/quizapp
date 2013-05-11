@@ -21,6 +21,7 @@ var allQuestions = [{
 	];
 
 var j = 0; // FOR CHOICES
+var x = 0; // For errorAlert
 // var question = allQuestions[j].question;
 // var choices = allQuestions[j].choices;
 var userScore = 0;
@@ -75,18 +76,19 @@ var answer = allQuestions[j].answer;
 var buttons = $("input[type='radio']");
 var buttonValue = $("input[type='radio']:checked").val();
 var buttonId = $("input[type='radio']:checked").attr('id');
-
 	if (buttons.is(":checked")) {
 		if (buttonValue == answer){
+				x--;
 				j++; // increment so we can move on to the next question
 				userScore++; // score up by 1 if correct answer
 				// quiz.empty(); // Delete all nodes including text
 			}
 		else{
+				x--;
 				j++;
 				
 			}
-		if (j === allQuestions.length){
+		if (j === allQuestions.length){ // If on last question
 			previous.unshift(buttonId);
 			quiz.empty();
 			displayScore();
@@ -95,14 +97,16 @@ var buttonId = $("input[type='radio']:checked").attr('id');
 			previous.unshift(buttonId);
 			createQuestion();
 			}
-			console.log(previous);
 		}
-		console.log(userScore);
+	else{
+		errorAlert();
+	}
+		console.log(x);
 }
 
 
 function displayScore(){
-var score = "Your score is " + userScore;
+var score = "Your score is " + userScore + "/" + allQuestions.length;
 	quiz.text(score);
 	resetButton.css('display', 'inline');
 	submitButton.css('display', 'none');
@@ -111,12 +115,12 @@ var score = "Your score is " + userScore;
 }
 
 function previousButton(){
-
 /*
 Section is what allows the back button to move the quiz backwards.
 */
 
 if (j > 0){
+	x = 0;
 	j--;
 	if (userScore > 0) { // only decrement if the userScore is greater than 1
 		userScore--;
@@ -127,6 +131,7 @@ if (j > 0){
 	// j--; // decrement j so that it changes the question and buttons accordingly.
 	}
 else {
+	x = 0;
 	j = 0; // if it tries to decrement when less than 0, change j to 0 so it doesn't go less than 0.
 	createQuestion();
 	}
@@ -151,3 +156,12 @@ createQuestion();
 	backButtons.css('display', 'inline');
 }
 
+function errorAlert(){
+if (x < 0){ // if X is less than 0, reset to 0.
+	x = 0;
+}
+if (x === 0){ // if X === 0, create the message.
+quiz.append("<br/>Please leave a message");
+x++; // stops from making more than 1 error message
+}
+}
