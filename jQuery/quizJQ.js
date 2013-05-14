@@ -101,7 +101,6 @@ var buttonId = $("input[type='radio']:checked").attr('id');
 	else{
 		errorAlert();
 	}
-		console.log(x);
 }
 
 
@@ -161,7 +160,7 @@ if (x < 0){ // if X is less than 0, reset to 0.
 	x = 0;
 }
 if (x === 0){ // if X === 0, create the message.
-quiz.append("<br/>Please leave a message");
+quiz.append("<br/>Please select an answer");
 x++; // stops from making more than 1 error message
 }
 }
