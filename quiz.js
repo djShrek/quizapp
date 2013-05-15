@@ -28,12 +28,11 @@
 
 // variables
 var a = 0;
-// var j = 0; 
+
 var userScore = 0;
 var o = 0;
 var questionPlace = document.getElementById('quizQuestion');
 var buttons = document.getElementsByName("test");
-// var theAnswer = allQuestions[j].answer;
 var keepTrack = [];
 
 
@@ -152,7 +151,7 @@ createQuestion();
 function displayScore(){
 var d = document.createElement('div');
 d.id = "displayScore";
-d.textContent = "Your score is: " + userScore + "/10";
+d.textContent = "Your score is: " + userScore + "/5";
 questionPlace.appendChild(d);
 }
 
@@ -187,9 +186,7 @@ out all the created HTML.
 */
 
 function startOver(){
-console.log(displayScore);
 a = 0;
-// j = 0;
 i = 0;
 o = 0;
 userScore = 0;
