@@ -28,7 +28,7 @@
 
 // variables
 var a = 0;
-var j = 0;
+// var j = 0; 
 var userScore = 0;
 var o = 0;
 var questionPlace = document.getElementById('quizQuestion');
@@ -51,8 +51,8 @@ Create "next" button using JavaScript
 2. If button checked's value is equal to correctAnswer, userScore++
 */
 function scoreUser(){
-if (j === (allQuestions.length - 1)){
-	j = 0;
+if (a === (allQuestions.length - 1)){ //j
+	a = 0; // j 
 	clearQuestion();
 	displayScore();
 	finalDisplay();
@@ -68,24 +68,26 @@ if (buttons[0].checked === false)
 				displayError();
 			}
 
-var theAnswer = allQuestions[j].answer;
+var theAnswer = allQuestions[a].answer;
 
 for (var i = 0; i < buttons.length; i++){
 	if (buttons[i].checked === true) {
-		a++; 
+		a++; // to change questions, choices, answers
 		o = 0; // for displayError;
 		if (buttons[i].value === theAnswer.toString()){
 			userScore++;
 			keepTrack.unshift(buttons[i].id);
-			clearQuestion();
-			createQuestion();
+			fadeForward();
+			//clearQuestion();
+			//createQuestion();
 			}
 		else {
-			clearQuestion();
-			createQuestion();
+			fadeForward();
+			//clearQuestion();
+			//createQuestion();
 			keepTrack.unshift(buttons[i].id);
 			}
-			j++; // for answers
+			// j++; // for answers
 		}
 	}
 	console.log(keepTrack);
@@ -131,11 +133,13 @@ var newNode = document.createElement("input");
 var newLabel = document.createElement("label");
 var newBr = document.createElement("br");
 newNode.type = "radio";
+newNode.class = "buttons";
 newNode.value = i + 1; //want the value to start at 1 since we want our answer values to start at 1
 newNode.name = "test";
 newNode.id = "button" + i;
 newNode.label = "button";
 newLabel.setAttribute('for', 'button' + i);
+newLabel.name = "test";
 newLabel.textContent = choices[i];
 questionPlace.appendChild(newBr);
 questionPlace.appendChild(newNode);
@@ -168,27 +172,13 @@ Go back to the previous question; if first question, just return first question.
 */
 
 function backButton(){
-// have to account for the answers too! 
 if (a <= 0){
-	a++;
-}
-if (j <=0 ){
-	j++;
+a = 0;
 }
 else {
-	j--;
+a--;
+fadeBack();
 }
-var e = --a;
-clearQuestion();
-createQuestion(e); // create previous question
-var keepTrackOfButton = keepTrack.splice(0,1)[0]; // return last button id
-var answer = allQuestions[j].answer;
-var prevButton = document.getElementById(keepTrackOfButton);
-if (prevButton.value === answer.toString()){ // Have to subtract from userScore if they go back and got the previous question right
-	userScore--;
-}
-prevButton.checked = true;
-console.log(keepTrack);
 }
 
 /*
@@ -199,7 +189,7 @@ out all the created HTML.
 function startOver(){
 console.log(displayScore);
 a = 0;
-j = 0;
+// j = 0;
 i = 0;
 o = 0;
 userScore = 0;
@@ -226,7 +216,25 @@ o++;
 }
 }
 
+/*
+Add jQuery fadeOut and fadeIn effect
+*/
+function fadeForward(){
+$(questionPlace).fadeOut(250, function(){
+	clearQuestion();
+	createQuestion();
+}).fadeIn();
+}
 
-// Use OOP to clean up code
-// Recreate with jQuery
-// Style 
+function fadeBack(){
+$(questionPlace).fadeOut(250, function(){
+	clearQuestion();
+	createQuestion();
+	var prevValue = keepTrack[0];
+	prevButton = document.getElementById(prevValue);
+	prevButton.checked = true;
+	keepTrack.shift();
+}).fadeIn();
+}
+
+
