@@ -27,6 +27,7 @@
 ];
 
 // variables
+
 var a = 0;
 
 var userScore = 0;
@@ -89,7 +90,6 @@ for (var i = 0; i < buttons.length; i++){
 			// j++; // for answers
 		}
 	}
-	console.log(keepTrack);
 }
 
 /* 
@@ -109,61 +109,63 @@ Order of events:
 */
 
 function createQuestion(e){
-if (a === allQuestions.length){
-	a = 0; // 
-}
-// Check which question we are on, if at last question, then reset.
-var question = allQuestions[a].question;
-var choices = allQuestions[a].choices;
-var answer = allQuestions[a].answer;
+	if (a === allQuestions.length){
+		a = 0; // 
+	}
+	// Check which question we are on, if at last question, then reset.
+	var question = allQuestions[a].question;
+	var choices = allQuestions[a].choices;
+	var answer = allQuestions[a].answer;
 
-// 1.
-/*
+	// 1.
+	/*
 
-*/
-// 2. 
-var newQuestion = document.createTextNode(question);
-questionPlace.appendChild(newQuestion);
+	*/
+	// 2. 
+	var newQuestion = document.createTextNode(question);
+	var newUl = document.createElement("ul");
+	questionPlace.appendChild(newQuestion);
 
-// 3. 
 
-for (var i = 0; i < choices.length; i++){
-var newNode = document.createElement("input");
-var newLabel = document.createElement("label");
-var newBr = document.createElement("br");
-newNode.type = "radio";
-newNode.class = "buttons";
-newNode.value = i + 1; //want the value to start at 1 since we want our answer values to start at 1
-newNode.name = "test";
-newNode.id = "button" + i;
-newNode.label = "button";
-newLabel.setAttribute('for', 'button' + i);
-newLabel.name = "test";
-newLabel.textContent = choices[i];
-questionPlace.appendChild(newBr);
-questionPlace.appendChild(newNode);
-questionPlace.appendChild(newLabel);
-}
+	// 3. 
+
+	for (var i = 0; i < choices.length; i++){
+		var newLi = document.createElement('li');
+		var newNode = document.createElement("input");
+		var newLabel = document.createElement("label");
+		var newBr = document.createElement("br");
+		newNode.type = "radio";
+		newNode.value = i + 1; //want the value to start at 1 since we want our answer values to start at 1
+		newNode.name = "test";
+		newNode.id = "button" + i;
+		newNode.label = "button";
+		newLabel.setAttribute('for', 'button' + i);
+		newLabel.textContent = choices[i];
+		questionPlace.appendChild(newBr);
+		questionPlace.appendChild(newNode);
+		questionPlace.appendChild(newLabel);
+	}
 }
 
 createQuestion();
 
 function displayScore(){
-var d = document.createElement('div');
-d.id = "displayScore";
-d.textContent = "Your score is: " + userScore + "/5";
-questionPlace.appendChild(d);
+	var d = document.createElement('div');
+	d.id = "displayScore";
+	d.textContent = "Your score is: " + userScore + "/5";
+	questionPlace.appendChild(d);
+	localStorage.userscore = userScore;
 }
 
 
 
 function finalDisplay(){ // Code to display only the "start over" buttong 
-var back = document.getElementById('back');
-back.style.display  = "none";
-var start = document.getElementById('score');
-start.style.display = "none";
-var startOver = document.getElementById("startOver");
-startOver.style.display = "inline";
+	var back = document.getElementById('back');
+	back.style.display  = "none";
+	var start = document.getElementById('score');
+	start.style.display = "none";
+	var startOver = document.getElementById("startOver");
+	startOver.style.display = "inline";
 }
 
 /*
@@ -171,13 +173,13 @@ Go back to the previous question; if first question, just return first question.
 */
 
 function backButton(){
-if (a <= 0){
-a = 0;
-}
-else {
-a--;
-fadeBack();
-}
+	if (a <= 0){
+	a = 0;
+	}
+	else {
+	a--;
+	fadeBack();
+	}
 }
 
 /*
@@ -186,31 +188,31 @@ out all the created HTML.
 */
 
 function startOver(){
-a = 0;
-i = 0;
-o = 0;
-userScore = 0;
-keepTrack = [];
-var display = document.getElementById('displayScore');
-questionPlace.removeChild(display);
-clearQuestion();
-createQuestion();
-var back = document.getElementById('back');
-back.style.display  = "inline";
-var start = document.getElementById('score');
-start.style.display = "inline";
-var startAgain = document.getElementById('startOver');
-startAgain.style.display = "none";
+	a = 0;
+	i = 0;
+	o = 0;
+	userScore = 0;
+	keepTrack = [];
+	var display = document.getElementById('displayScore');
+	questionPlace.removeChild(display);
+	clearQuestion();
+	createQuestion();
+	var back = document.getElementById('back');
+	back.style.display  = "inline";
+	var start = document.getElementById('score');
+	start.style.display = "inline";
+	var startAgain = document.getElementById('startOver');
+	startAgain.style.display = "none";
 }
 
 function displayError(){
-if (o === 0){
-var div1 = document.createElement('div');
-div1.id = "displayError";
-div1.textContent = "You must select an answer";
-questionPlace.appendChild(div1);
-o++;
-}
+	if (o === 0){
+		var div1 = document.createElement('div');
+		div1.id = "displayError";
+		div1.textContent = "You must select an answer";
+		questionPlace.appendChild(div1);
+		o++;
+	}
 }
 
 /*
@@ -225,6 +227,7 @@ $(questionPlace).fadeOut(250, function(){
 
 function fadeBack(){
 $(questionPlace).fadeOut(250, function(){
+	userScore--; // decrement userScore
 	clearQuestion();
 	createQuestion();
 	var prevValue = keepTrack[0];
@@ -234,4 +237,45 @@ $(questionPlace).fadeOut(250, function(){
 }).fadeIn();
 }
 
+var users = [];
+
+// added user authentication using HTML5 storage API. Very basic but just testing the localstorage API.
+// This is the sign up form.
+function getFormData(){
+	function userName(name, password){
+		this.name = name;
+		this.password = password;
+	}
+var userEmail = document.getElementById('email').value;
+var userPw = document.getElementById('password').value;
+localStorage.setItem("username", userEmail);
+localStorage.password = userPw;
+var newUser = new userName(userEmail, userPw);
+users.push(newUser);
+}
+
+//added a login screen so users can login with their last quiz score saved.
+
+function returnUser(){
+	var oldUser = document.getElementById('enteremail').value;
+	var password = document.getElementById('enterpassword').value;
+	console.log(oldUser);
+	if (oldUser === localStorage.username){
+		if (localStorage.password === password){
+		alert("Welcome back " + oldUser + "! " + "Your last quiz score was " + localStorage.userscore);
+		}
+		else if (password === ""){
+		alert("Please enter a password");
+		}
+		else {
+		alert("wrong password!");
+		}
+	}
+	else if (oldUser === ""){
+		alert("Please enter a username");
+	}
+	else {
+		alert("There is no user with that name");
+		}
+}
 

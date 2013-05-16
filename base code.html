@@ -26,7 +26,32 @@
 	<button type="button" id="startOver" onclick=startOver()>Start Over</button>
 	</div>
 
+	<section class="loginform cf">
+		<form name="login" action="index_submit" method="get" accept-charset="utf-8">
+			<ul>
+				<li><label for="usermail">Username:</label>
+					<input type="email" id="email" name="userAuth" placeholder="username" required></li>
+				<li><label for="password">Password:</label>
+					<input type="password" name="userAuth" id="password" placeholder="password" required></li>
+					<li>
+						<input type="reset" name="userAuth" onclick=getFormData() value="Sign-Up"></li>
+			</ul>
+		</form>
+	</section>
 
+
+	<section class="loginform cf">
+		<form name="login" action="index_submit" method="get" accept-charset="utf-8">
+			<ul>
+				<li><label for="usermail">Username:</label>
+					<input type="email" id="enteremail" name="usermail" placeholder="username" required></li>
+				<li><label for="password">Password:</label>
+					<input type="password" name="password" id="enterpassword" placeholder="password" required></li>
+					<li>
+						<input type="reset" onclick=returnUser() value="Login"></li>
+			</ul>
+		</form>
+	</section>
 
 	<div class="footer">
 	
