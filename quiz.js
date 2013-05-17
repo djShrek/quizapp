@@ -51,22 +51,19 @@ Create "next" button using JavaScript
 2. If button checked's value is equal to correctAnswer, userScore++
 */
 function scoreUser(){
-if (a === (allQuestions.length - 1)){ //j
+	if (a === (allQuestions.length - 1)){ //j
 	a = 0; // j 
+	userScore++;
 	clearQuestion();
 	displayScore();
 	finalDisplay();
 }
 
-// If you click on the submit button and there are no radio buttons selected, alert
-// that they must choose an answer.
-
-if (buttons[0].checked === false)
-	if (buttons[1].checked === false)
-		if (buttons[2].checked === false)
-			if (buttons[3].checked === false){
-				displayError();
-			}
+for (var t = 0; t < buttons.length; t++){
+	if(buttons[t].checked === false){
+		displayError();
+	}
+}
 
 var theAnswer = allQuestions[a].answer;
 
@@ -98,8 +95,7 @@ removeButtons function is used to delete all
 
 function clearQuestion(){ // clear the entire question with buttons, labels, br
 	questionPlace.innerHTML = "";
-
-				}
+	}
 /*
 Order of events:
 1. Create encapsulating DIV
@@ -148,6 +144,10 @@ function createQuestion(e){
 }
 
 createQuestion();
+
+
+
+
 
 function displayScore(){
 	var d = document.createElement('div');
@@ -242,16 +242,25 @@ var users = [];
 // added user authentication using HTML5 storage API. Very basic but just testing the localstorage API.
 // This is the sign up form.
 function getFormData(){
+	var userEmail = document.getElementById('email').value;
+	var userPw = document.getElementById('password').value;
 	function userName(name, password){
-		this.name = name;
-		this.password = password;
+			this.name = name;
+			this.password = password;
+		}
+	if (userEmail === ""){
+		alert("Please fill in the username");
+		}
+	else if (userPw === ""){
+		alert("Please fill in the password");
 	}
-var userEmail = document.getElementById('email').value;
-var userPw = document.getElementById('password').value;
-localStorage.setItem("username", userEmail);
-localStorage.password = userPw;
-var newUser = new userName(userEmail, userPw);
-users.push(newUser);
+	else {
+		localStorage.setItem("username", userEmail);
+		localStorage.password = userPw;
+		var newUser = new userName(userEmail, userPw);
+		users.push(newUser);
+	}
+	//$('#signIn').append("hi");
 }
 
 //added a login screen so users can login with their last quiz score saved.
@@ -259,7 +268,6 @@ users.push(newUser);
 function returnUser(){
 	var oldUser = document.getElementById('enteremail').value;
 	var password = document.getElementById('enterpassword').value;
-	console.log(oldUser);
 	if (oldUser === localStorage.username){
 		if (localStorage.password === password){
 		alert("Welcome back " + oldUser + "! " + "Your last quiz score was " + localStorage.userscore);
@@ -278,4 +286,5 @@ function returnUser(){
 		alert("There is no user with that name");
 		}
 }
+
 
