@@ -51,19 +51,29 @@ Create "next" button using JavaScript
 2. If button checked's value is equal to correctAnswer, userScore++
 */
 function scoreUser(){
-	if (a === (allQuestions.length - 1)){ //j
-	a = 0; // j 
-	userScore++;
-	clearQuestion();
-	displayScore();
-	finalDisplay();
+	checkButton();
+	if (a === (allQuestions.length - 1)){
+		a = 0;
+		userScore++;
+		clearQuestion();
+		displayScore();
+		finalDisplay();
 }
 
-for (var t = 0; t < buttons.length; t++){
-	if(buttons[t].checked === false){
+// Makes sure user checkes a button
+function checkButton(){
+var isTrue = false;
+for (var z =0; z < buttons.length; z++){
+	if (buttons[z].checked === true){
+		isTrue = true;
+		break;
+	}
+}
+	if(isTrue === false){
 		displayError();
 	}
 }
+
 
 var theAnswer = allQuestions[a].answer;
 
@@ -75,23 +85,14 @@ for (var i = 0; i < buttons.length; i++){
 			userScore++;
 			keepTrack.unshift(buttons[i].id);
 			fadeForward();
-			//clearQuestion();
-			//createQuestion();
 			}
 		else {
 			fadeForward();
-			//clearQuestion();
-			//createQuestion();
 			keepTrack.unshift(buttons[i].id);
 			}
-			// j++; // for answers
 		}
 	}
 }
-
-/* 
-removeButtons function is used to delete all
-*/
 
 function clearQuestion(){ // clear the entire question with buttons, labels, br
 	questionPlace.innerHTML = "";
@@ -151,8 +152,8 @@ createQuestion();
 
 function displayScore(){
 	var d = document.createElement('div');
-	d.id = "displayScore";
-	d.textContent = "Your score is: " + userScore + "/5";
+		d.id = "displayScore";
+		d.textContent = "Your score is: " + userScore + "/5";
 	questionPlace.appendChild(d);
 	localStorage.userscore = userScore;
 }
@@ -174,11 +175,11 @@ Go back to the previous question; if first question, just return first question.
 
 function backButton(){
 	if (a <= 0){
-	a = 0;
+		a = 0;
 	}
 	else {
-	a--;
-	fadeBack();
+		a--;
+		fadeBack();
 	}
 }
 
@@ -227,10 +228,10 @@ $(questionPlace).fadeOut(250, function(){
 
 function fadeBack(){
 $(questionPlace).fadeOut(250, function(){
+	var prevValue = keepTrack[0];
 	userScore--; // decrement userScore
 	clearQuestion();
 	createQuestion();
-	var prevValue = keepTrack[0];
 	prevButton = document.getElementById(prevValue);
 	prevButton.checked = true;
 	keepTrack.shift();
@@ -270,13 +271,13 @@ function returnUser(){
 	var password = document.getElementById('enterpassword').value;
 	if (oldUser === localStorage.username){
 		if (localStorage.password === password){
-		alert("Welcome back " + oldUser + "! " + "Your last quiz score was " + localStorage.userscore);
+			alert("Welcome back " + oldUser + "! " + "Your last quiz score was " + localStorage.userscore);
 		}
 		else if (password === ""){
-		alert("Please enter a password");
+			alert("Please enter a password");
 		}
 		else {
-		alert("wrong password!");
+			alert("wrong password!");
 		}
 	}
 	else if (oldUser === ""){
@@ -284,7 +285,7 @@ function returnUser(){
 	}
 	else {
 		alert("There is no user with that name");
-		}
+	}
 }
 
 
