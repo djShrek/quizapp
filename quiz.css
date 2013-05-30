@@ -3,9 +3,24 @@ text-align: center ;
 margin: 0px ;
 background-color: ;
 color: red;
+font-size: 30px;
+}
 
+li {
+list-style: none;
+}
+
+#quizQuestion {
+position: none;
 }
 
 #startOver {
 display: none;
+}
+
+#logan {
+z-index: -1;
+float: left;
+position: absolute;
+left: 0;
 }

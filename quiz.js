@@ -1,4 +1,4 @@
-	var allQuestions = [
+var allQuestions = [
 	{
 		question: "Who is #24 on the Lakers?",
 		choices: ["LeBrown James", "Paul Gazzol", "Kobe Bryant", "Tiger Woods"],
@@ -25,6 +25,7 @@
 		answer: 2
 	}
 ];
+
 
 // variables
 
@@ -69,7 +70,7 @@ for (var z =0; z < buttons.length; z++){
 		break;
 	}
 }
-	if(isTrue === false){
+	if (isTrue === false){
 		displayError();
 	}
 }
