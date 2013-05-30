@@ -1,26 +1,40 @@
- body {
-text-align: center ;
-margin: 0px ;
-background-color: ;
-color: red;
-font-size: 30px;
+#container {
+	width: 1000px;
+	margin: 0px auto;
+	text-align: center;
 }
 
-li {
-list-style: none;
+label {
+
+	border-radius: 10px;
+	color: white;
+	background-color: red;
 }
+
+
 
 #quizQuestion {
-position: none;
+font-size: 30px;
+background-color: grey;
+margin: 0px auto;
 }
 
-#startOver {
-display: none;
+#quizQuestion input {
+float: left;
+}
+
+#quizQuestion label {
+	display: inline-block;
 }
 
 #logan {
-z-index: -1;
-float: left;
-position: absolute;
-left: 0;
+	display: none;
+	z-index: -1;
+	float: left;
+	position: absolute;
+	left: 0;
+}
+
+.footer {
+	margin-top: 200px;
 }

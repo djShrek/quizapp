@@ -120,15 +120,17 @@ function createQuestion(e){
 
 	*/
 	// 2. 
+	var newDiv = document.createElement('div');
+	newDiv.id = "questions";
 	var newQuestion = document.createTextNode(question);
-	var newUl = document.createElement("ul");
-	questionPlace.appendChild(newQuestion);
-
+	questionPlace.appendChild(newDiv);
+	var secret = document.getElementById('questions');
+	secret.innerHTML = question;
 
 	// 3. 
 
 	for (var i = 0; i < choices.length; i++){
-		var newLi = document.createElement('li');
+		
 		var newNode = document.createElement("input");
 		var newLabel = document.createElement("label");
 		var newBr = document.createElement("br");
