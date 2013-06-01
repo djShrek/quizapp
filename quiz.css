@@ -1,40 +1,178 @@
+body {
+	font-family: 'Bangers', cursive;
+}
+
+
+
 #container {
 	width: 1000px;
 	margin: 0px auto;
 	text-align: center;
+	background-color: none;
 }
 
-label {
+#quiz {
+	margin: 0px auto;
+	padding: 40px;
+	background-color: none;
+	width: 750px;
+	margin-right: 50px;
+}
 
+
+#questions {
+	max-width: 600px;
+	font-size: 40px;
+	/* For bubble effect */
+	position: relative;
+	width: auto;
+	height: auto;
+	text-align: center;
+	line-height: 40px;
+	background-color: #fff;
+	border: 8px solid black;
+	-webkit-border-radius: 100px 50px;
+	-moz-border-radius: 30px;
+	border-radius: 20px;
+	-webkit-box-shadow: 2px 2px 4px #888;
+	-moz-box-shadow: 2px 2px 4px #888;
+	box-shadow: 2px 2px 4px #888;
+	margin-bottom: 50px;
+	padding: 40px;
+}
+
+#questions:before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 5%;
+	top: 100%;
+	border: 25px solid;
+	border-color: black transparent transparent black;
+}
+
+#questions:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	left: 6.2%;
+	top: 100%;
+	border: 15px solid;
+	border-color: #fff transparent transparent #fff;
+}
+
+/* choices */
+
+#choices {
+	margin: 0px auto;
+	width: 600px;
+	background-color: hsla(357, 96%, 45%, 0.3);
+	padding: 40px;
+}
+
+#choices div{
+	height: auto;
+	width: 500px;
+	border: 5px solid black;
 	border-radius: 10px;
-	color: white;
+	color: black;
+	background-color: white;
+	margin: 20px 0px;
+}
+
+
+#choices input {
+	float: left;
+	position: relative;
+	margin-top: 15px;
+	margin-left: 50px; 
+}
+
+#choices label {
+	font-size: 40px;
+}
+
+#choices div:hover:nth-child(even) {
 	background-color: red;
+	transition: 1s;
+}
+
+#choices div:hover:nth-child(odd) {
+	background-color: yellow	;
+	transition: 1s;
 }
 
 
-
-#quizQuestion {
-font-size: 30px;
-background-color: grey;
-margin: 0px auto;
-}
-
-#quizQuestion input {
-float: left;
-}
-
-#quizQuestion label {
-	display: inline-block;
-}
+/* Choices end */
 
 #logan {
-	display: none;
+	
 	z-index: -1;
 	float: left;
 	position: absolute;
 	left: 0;
 }
 
-.footer {
-	margin-top: 200px;
+#steve {
+	z-index: -2;
+	float: right;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	
 }
+
+#thor {
+	z-index: -1;
+	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: none;
+}
+
+.footer {
+	max-width: auto;
+	max-height: auto;
+	background-color: black;
+}
+
+/* Do all tests here */
+
+#startOver {
+	display: none;
+}
+
+/* For reference
+#choice3 {
+	margin: 10px auto;
+	width: 400px;
+	background-color: red;
+	border-radius: 10px;
+}
+*/
+
+#test1{
+	width: 500px;
+	margin: 0px auto;
+	margin-top: 40px;
+	background-color: coral;
+}
+
+#testP {
+	background-color: coral;
+	border-radius: 10px
+}
+
+.test {
+	content: "";
+		position: relative;
+		width: 0;
+		height: 0;
+		left: 30px;
+		top: 100px;
+		border: 25px solid;
+		border-color: #666 transparent transparent #666;
+	}

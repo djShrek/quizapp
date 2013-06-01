@@ -1,7 +1,31 @@
 var allQuestions = [
 	{
-		question: "Who is #24 on the Lakers?",
-		choices: ["LeBrown James", "Paul Gazzol", "Kobe Bryant", "Tiger Woods"],
+		question: "Which one of these mutants is not a child of Magneto?",
+		choices: ["Scarlet Witch", "Quick Silver", "Polaris", "Havoc"],
+		pictures: ["img/thor.jpg", "img/captainA.jpg"],
+		answer: 3
+	},
+	{
+		question: "Which song features Nadia Ali??",
+		choices: ["Heart Break", "We Are Never Getting Back Together", "Love Story", "In My Mind"],
+		pictures: ["img/thor.jpg", "img/captainA.jpg"],
+		answer: 3
+	},
+	{
+		question: "How many rings does Phil Jackson have???",
+		choices: ["2", "0", "22", "11"],
+		pictures: ["img/thor.jpg", "img/captainA.jpg"],
+		answer: 4
+	},
+	{
+		question: "Which person is not a Marvel character?",
+		choices: ["Captain Marvel", "Cyclops", "The Star-Lord", "Pepper Potts"],
+		answer: 1
+	},
+	{
+		question: "Which one of these mutants is not a child of Magneto?",
+		choices: ["Scarlet Witch", "Quick Silver", "Polaris", "Havoc"],
+		pictures: ["img/thor.jpg", "img/captainA.jpg"],
 		answer: 3
 	},
 	{
@@ -33,7 +57,7 @@ var a = 0;
 
 var userScore = 0;
 var o = 0;
-var questionPlace = document.getElementById('quizQuestion');
+var questionPlace = document.getElementById('quiz');
 var buttons = document.getElementsByName("test");
 var keepTrack = [];
 
@@ -120,32 +144,66 @@ function createQuestion(e){
 
 	*/
 	// 2. 
-	var newDiv = document.createElement('div');
-	newDiv.id = "questions";
-	var newQuestion = document.createTextNode(question);
-	questionPlace.appendChild(newDiv);
-	var secret = document.getElementById('questions');
-	secret.innerHTML = question;
+
+	var newQuestionDiv = document.createElement('div'); // Div for questions
+		newQuestionDiv.id = "questions"; // Div id
+		questionPlace.appendChild(newQuestionDiv); 
+	var theQuestion = document.getElementById('questions');
+		theQuestion.innerHTML = question;
+
 
 	// 3. 
 
-	for (var i = 0; i < choices.length; i++){
-		
-		var newNode = document.createElement("input");
-		var newLabel = document.createElement("label");
-		var newBr = document.createElement("br");
-		newNode.type = "radio";
-		newNode.value = i + 1; //want the value to start at 1 since we want our answer values to start at 1
-		newNode.name = "test";
-		newNode.id = "button" + i;
-		newNode.label = "button";
-		newLabel.setAttribute('for', 'button' + i);
-		newLabel.textContent = choices[i];
-		questionPlace.appendChild(newBr);
-		questionPlace.appendChild(newNode);
-		questionPlace.appendChild(newLabel);
-	}
-}
+	var newChoicesDiv = document.createElement('div'); // separate DIV for "choices";
+		newChoicesDiv.id = "choices";
+		questionPlace.appendChild(newChoicesDiv);
+
+
+		for (var i = 0; i < choices.length; i++){
+			var singleChoice = document.createElement('div'); // creating a separate DIV for each button so I can style them individually
+				singleChoice.id = "choice" + i;
+				newChoicesDiv.appendChild(singleChoice);
+
+
+			var newNode = document.createElement("input");
+			var newLabel = document.createElement("label");
+			var newBr = document.createElement("br");
+			var newParagraph = document.createElement('p');
+				newNode.type = "radio";
+				newNode.value = i + 1; //want the value to start at 1 since we want our answer values to start at 1
+				newNode.name = "test";
+				newNode.id = "button" + i;
+				newNode.label = "button";
+				newLabel.setAttribute('for', 'button' + i);
+				newLabel.textContent = choices[i];
+				singleChoice.appendChild(newNode);
+				singleChoice.appendChild(newLabel);
+			}
+
+			// For fading pictures in and out
+
+			var newPic = $('#choices div');
+			$('#choices div').mouseenter(function(){ // when mouse enters the button
+			var thisImage = this.id;
+			$('#steve').fadeOut(changeImage).fadeIn();
+			function changeImage(){
+					switch(thisImage){
+						case 'choice0':
+							$('#steve').attr('src', allQuestions[a].pictures[0]);
+								break;
+						case 'choice1':
+							$('#steve').attr('src', allQuestions[a].pictures[1]);
+								break;
+						case 'choice2':
+							$('#steve').attr('src', allQuestions[a].pictures[2]);
+								break;
+						case 'choice3':
+							$('#steve').attr('src', allQuestions[a].pictures[3]);
+								break;
+					}
+				}
+			});
+		}
 
 createQuestion();
 
@@ -157,8 +215,8 @@ function displayScore(){
 	var d = document.createElement('div');
 		d.id = "displayScore";
 		d.textContent = "Your score is: " + userScore + "/5";
-	questionPlace.appendChild(d);
-	localStorage.userscore = userScore;
+		questionPlace.appendChild(d);
+		localStorage.userscore = userScore;
 }
 
 
@@ -290,5 +348,36 @@ function returnUser(){
 		alert("There is no user with that name");
 	}
 }
+
+/* test code */
+
+/*
+$('#choices div').mouseenter(function(){ // when mouse enters the button
+	var thisImage = this.id;
+	console.log(thisImage);
+	$('#steve').fadeOut(changeImage).fadeIn();
+	function changeImage(){
+	switch(thisImage){
+		case 'choice0':
+			console.log(thisImage);
+			$('#steve').attr('src', allQuestions[a].pictures[0]);
+			break;
+		case 'choice1':
+			console.log(thisImage);
+			$('#steve').attr('src', allQuestions[a].pictures[1]);
+			break;
+		case 'choice2':
+			console.log(thisImage);
+			$('#steve').attr('src', allQuestions[a].pictures[2]);
+			break;
+		case 'choice3':
+			console.log(thisImage);
+			$('#steve').attr('src', allQuestions[a].pictures[3]);
+			break;
+		}
+	}
+});
+*/
+
 
 
