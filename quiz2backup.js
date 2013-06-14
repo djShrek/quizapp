@@ -122,6 +122,16 @@ for (var i = 0; i < buttons.length; i++){
 function clearQuestion(){ // clear the entire question with buttons, labels, br
 	questionPlace.innerHTML = "";
 	}
+/*
+Order of events:
+1. Create encapsulating DIV
+2. Create Question
+3. Create buttons with corresponding labels
+
+*/
+
+
+
 
 function createQuestion(e){
 	if (a === allQuestions.length){
@@ -132,47 +142,46 @@ function createQuestion(e){
 	var choices = allQuestions[a].choices;
 	var answer = allQuestions[a].answer;
 
+	// 1.
+	/*
 
-	/*var newQuestionDiv = document.createElement('div'); // Div for questions
+	*/
+	// 2. 
+
+	var newQuestionDiv = document.createElement('div'); // Div for questions
 		newQuestionDiv.id = "questions"; // Div id 
 		questionPlace.appendChild(newQuestionDiv);
-	*/
-
-	/* question */
-
-	var question1 = "<div id='theQuestion'></div>";
-
-	/* choices */
-	var first = "<div id='choices'><script id='quiz1' type='text/x-handlebars-template'>";
-	var second = "{{#choicez choices}}" + "{{this}}" + "{{/choicez}}</script></div>";
-
-		if (questionPlace.innerHTML === ""){
-			questionPlace.innerHTML = question1 + first + second;
-		}
-
-		var theQuestion = document.getElementById('theQuestion');
+	var theQuestion = document.getElementById('questions');
 		theQuestion.innerHTML = question;
 
 
-	Handlebars.registerHelper('choicez', function(context, options){
-	var theChoices = "";
-	for (var i =0; i < context.length; i++ ){
-		var choice1 = "<div id=" + "choice" + i + ">" + '\u0020';
-		var choice2 = "<input id=button" + i + '\u0020';
-		var choice3 = "type='radio'" + "value=" + (i + 1) + '\u0020';
-		var choice4 = "name=test" + ">" + "<label for=button" + i + '\u0020';
-		var choice5 = ">" + options.fn(context[i]) + "</div>";
-		var appendChoice = choice1 + choice2 + choice3 + choice4 + choice5;
-		theChoices += appendChoice;
-	}
+	// 3. 
 
-		return theChoices;
-});
+	var newChoicesDiv = document.createElement('div'); // separate DIV for "choices";
+		newChoicesDiv.id = "choices";
+		questionPlace.appendChild(newChoicesDiv);
 
-var quizTemplate = $('#quiz1').html();
-var preTemplate = Handlebars.compile(quizTemplate);
-var handledTemplate = preTemplate(allQuestions[a]);
-$('#choices').append(handledTemplate);
+
+		for (var i = 0; i < choices.length; i++){
+			var singleChoice = document.createElement('div'); // creating a separate DIV for each button so I can style them individually
+				singleChoice.id = "choice" + i;
+				newChoicesDiv.appendChild(singleChoice);
+
+
+			var newNode = document.createElement("input");
+			var newLabel = document.createElement("label");
+			var newBr = document.createElement("br");
+			var newParagraph = document.createElement('p');
+				newNode.type = "radio";
+				newNode.value = i + 1; //want the value to start at 1 since we want our answer values to start at 1
+				newNode.name = "test";
+				newNode.id = "button" + i;
+				newNode.label = "button";
+				newLabel.setAttribute('for', 'button' + i);
+				newLabel.textContent = choices[i];
+				singleChoice.appendChild(newNode);
+				singleChoice.appendChild(newLabel);
+			}
 
 			// For fading pictures in and out
 
@@ -315,6 +324,7 @@ function getFormData(){
 		var newUser = new userName(userEmail, userPw);
 		users.push(newUser);
 	}
+	//$('#signIn').append("hi");
 }
 
 //added a login screen so users can login with their last quiz score saved.
@@ -340,6 +350,4 @@ function returnUser(){
 		alert("There is no user with that name");
 	}
 }
-
-/* Templating with Handlebars */
 
