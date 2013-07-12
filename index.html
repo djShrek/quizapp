@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equi="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Quiz</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="quiz.css" type="text/css" media="screen">
+</head>
+<body>
+	<div class="navbar">
+  		<div class="navbar-inner">
+ 		   <a class="brand" href="index.html">MARVEL QUIZ</a>
+  			 <ul class="nav">
+			      <li class="active"><a href="index.html">Home</a></li>
+    		</ul>
+  		</div>
+	</div>
+			
+	 <img id="logan" src="img/wolverine.jpg" alt="wolverine">
+					
+	<div id="container" class="row">
+		<div class="span12">
+
+			<div class="header">
+				Welcome to the <span>Marvel</span> quiz!
+			</div>
+	
+			<div id="main-content">
+				<div class="row">
+					<div class="span12">
+
+						<div class="span11" id="quiz"> <!--quizQuestion-->
+							<div id="theQuestion">
+
+							</div>	
+								<div id="choices">
+									<script id="quiz1" type="text/x-handlebars-template">
+										{{#choicez choices}}
+											{{this}}
+										{{/choicez}}
+									</script>
+								</div>	
+									
+						</div>	
+					</div>
+				</div>
+				<div id="pic">
+					<img id="steve" src="img/thor.jpg" alt="thor">
+				</div>
+			</div>
+	
+
+				
+	
+				<div class="formButton">
+					<div class="alert alert-danger hide">
+					 	<strong>Warning!</strong> Best check yo self, select an answer!
+					</div>
+				
+					<button  type="button" class="btn btn-large btn-inverse" id="back" onclick=backButton()>Back</button>
+					<button  type="button" class="btn btn-large btn-inverse" id="score" onclick=scoreUser()>Submit Answer!</button>
+					<button type="button" class="btn btn-large btn-inverse" id="startOver" onclick=startOver()>Start Over</button>
+					<hr/>
+					<!-- Button to trigger modal -->
+						
+						 
+						<!-- Modal -->
+						<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+						    <h3 id="myModalLabel">Congratulations!</h3>
+						  </div>
+						  <div id="modalBody" class="modal-body">
+						    
+						  </div>
+						  <div class="modal-footer">
+						    <button class="btn-large btn-inverse" data-dismiss="modal"  onclick=startOver()>Start Over</button>
+						  </div>
+						</div>
+				</div>
+		</div>
+
+		<div class="row footer">
+			<div class="span12">
+					Created By: The Pumpkin King ;)
+			</div>
+		</div> 
+	</div><!--container-->
+<script src="jquery.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="handlebars/handlebars.js"></script> 
+<script src="quiz.js"></script> 
+
+</body>
+</html>

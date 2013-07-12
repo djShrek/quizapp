@@ -1,22 +1,25 @@
 body {
-	font-family: 'Bangers', cursive;
+	font-family: 'Bangers', cursive; 
 }
-
-
 
 #container {
 	width: 1000px;
 	margin: 0 auto;
 	text-align: center;
-	background-color: none;
+	font-size: 50px
+}
+
+#main-content{
+	position: relative;
 }
 
 #quiz {
+	max-height: 50%;
+	height: 50%;
 	margin: 0 auto;
 	padding: 40px;
-	background-color: none;
 	width: 750px;
-	margin-right: 50px;
+	margin-right: 100px;
 }
 
 
@@ -107,36 +110,10 @@ body {
 
 /* Choices end */
 
-#logan {
-	
-	z-index: -1;
-	float: left;
-	position: absolute;
-	left: 0;
-}
-
-#steve {
-	z-index: -2;
-	float: right;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	
-}
-
-#thor {
-	z-index: -1;
-	float: right;
-	position: absolute;
-	top: 0;
-	right: 0;
-	display: none;
-}
 
 .footer {
-	max-width: auto;
-	max-height: auto;
-	background-color: black;
+font-size: 12px;
+text-align: center;
 }
 
 /* Do all tests here */
@@ -168,3 +145,48 @@ body {
 		border: 25px solid;
 		border-color: #666 transparent transparent #666;
 	}
+
+/* nav bar */
+.navbar {
+	font-size: 30px
+}
+
+.header {
+	margin: 20px 0;
+	margin-right: 160px;
+}
+
+.header span{
+	background-color: red;
+	color: white;
+}
+
+/* Form Buttons */
+
+.formButton {
+	margin-right: 160px;
+}
+
+.alert {
+	font-size: 30px;
+	
+}
+
+#logan {
+	margin-top: 100px;
+	z-index: -1;
+	float: left;
+	position: absolute;
+	left: 0;
+	top: 15%	;
+}
+
+
+#steve {
+	z-index: -2;
+	float: right;
+	position: absolute;	
+	right: -30%;
+	top: 10%;
+}
+
